@@ -1,0 +1,7 @@
+version: "3"
+services:
+    flutter:
+        build: .
+        volumes:
+            - ./:/root/workspace
+        tty: true
