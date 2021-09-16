@@ -16,7 +16,7 @@
 * web・・・Web個別
 * pubspec.yaml・・・パッケージ管理
 # Dartの基本
-* 演算
+1. 演算
 - +,-,*,/,% (四則演算)
 - ++,-- (インクリメント,デクリメント)
 - >> (シフト)
@@ -26,12 +26,12 @@
 - += (複合代入)
 - as (型キャスト)
 - is (型チェック)
-* 制御構文
+2. 制御構文
 - if,else (条件分岐)
 - switch,case (多分岐)
 - for,while,forEach, for in, dowhile (ループ)
 - break,continue (制御)
-* 変数の型
+3. 変数の型
 - int (整数)
 - double (実数)
 - num (数値)
@@ -43,13 +43,13 @@
 - Map (Key/Value)
 - Symbol (識別子)
 - late (遅延初期化)
-* 文字列
+4. 文字列
 ```Dart:文字列
 print("文字列の表示") // 文字列の表示
 print("$_counter") // 変数の表示
 print("${_counter + 1}") // 式の展開
 ```
-* 変数修飾子
+5. 変数修飾子
 - final (再代入不可)
 - const (定数)
 - var (型推論)
@@ -58,7 +58,7 @@ print("${_counter + 1}") // 式の展開
 - catch (例外が起きたときの処理)
 - finally (例外に関わらず実施する処理)
 - throw (例外を投げる)
-* クラス
+6. クラス
 ```Dart:class
 // クラスの定義
 class MyData {
@@ -78,7 +78,7 @@ class MyData {
     - interfaceはキーワードは無いが、classでインタフェースを作る
     - 複数可
 - with (mixin) 
-* フィールド/メソッド
+7. フィールド/メソッド
 - _xxx
     - _ではじめるとプライベート変数/メソッド扱い
 - static (static化)
@@ -102,7 +102,7 @@ print(hoge.data);
 - class(String name) : super(name) (イニシャライザリスト)
     - :で区切った初期化処理を実施
 - factory (factoryコンストラクタの定義)
-* インポート
+8. インポート
 - import
     - パッケージをインポート
 - import as xxx
@@ -111,7 +111,7 @@ print(hoge.data);
     - yyy のみを使う
 - import hide zzz
     - zzz は除外する
-* メソッド
+9. メソッド
 - method1(param: 1, param2: "data")
     - 名前付きパラメタ
 - method2(String key, [String opt])
@@ -126,13 +126,13 @@ print(hoge.data);
 - method5(data) => {print(data)}
     - 匿名関数
     - 簡素な関数の定義の命名することなく定義できる
-* その他
+10. その他
 - enum (列挙型)
 - Sum<Int> (ジェネリクス)
 - async,await (非同期)
 - Future (非同期の戻り値)
 - assert (アサーション)
-* カスケード記法
+11. カスケード記法
 - .. (カスケード記法)
     - オブジェクトのメソッドを連続で呼び出せる
 ```Dart:カスケード記法
