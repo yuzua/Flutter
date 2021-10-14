@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      home: Text(
+      home: Scaffold(
         // This is the theme of your application.
         //
         // Try running your application with "flutter run". You'll see the
@@ -22,8 +22,13 @@ class MyApp extends StatelessWidget {
         // or simply save your changes to "hot reload" in a Flutter IDE).
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
-        'Hello, Flutter World!!',
-        style: TextStyle(fontSize:32.0),
+        appBar: AppBar(
+          title: Text('Hello Flutter'),
+        ),
+        body: Text(
+          'Hello Flutter World!!',
+          style: TextStyle(fontSize:32.0),
+        ),
       ),
     );
   }
