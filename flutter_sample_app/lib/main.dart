@@ -73,8 +73,13 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
+        title: Row(children: [
+          Icon(Icons.create),
+          Text("初めてのタイトル"),
+        ]
+        )
       ),
+      drawer: Drawer(child: Center(child: Text("Drawer"))),
       // body: Center(
       //   // Center is a layout widget. It takes a single child and positions it
       //   // in the middle of the parent.
@@ -105,34 +110,11 @@ class _MyHomePageState extends State<MyHomePage> {
       //     ],
       //   ),
       // ),
-      body: Column(children: [
-        Text("初めてのテキスト"),
-        Text("２番目のテキスト"),
-        TextButton(
-          onPressed: () => {print("ボタンが押されたよ")},
-          child: Text("更新"),
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Icon(
-              Icons.favorite,
-              color: Colors.pink,
-              size: 24.0,
-            ),
-            Icon(
-              Icons.audiotrack,
-              color: Colors.green,
-              size: 30.0
-            ),
-            Icon(
-              Icons.beach_access,
-              color: Colors.blue,
-              size: 36.0,
-            )
-          ],
-        )
-      ])
+      body: Text("初めてのテキスト"),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => {print("押したね?")},
+        child: Icon(Icons.timer),
+      ),
       // floatingActionButton: FloatingActionButton(
       //   onPressed: _incrementCounter,
       //   tooltip: 'Increment',
