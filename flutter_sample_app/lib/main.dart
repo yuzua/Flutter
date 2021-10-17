@@ -105,7 +105,14 @@ class _MyHomePageState extends State<MyHomePage> {
       //     ],
       //   ),
       // ),
-      body: Text("初めてのテキスト"),
+      body: Column(children: [
+        Text("初めてのテキスト"),
+        Text("２番目のテキスト"),
+        TextButton(
+          onPressed: () => {print("ボタンが押されたよ")},
+          child: Text("更新"),
+        ),
+      ])
       // floatingActionButton: FloatingActionButton(
       //   onPressed: _incrementCounter,
       //   tooltip: 'Increment',
