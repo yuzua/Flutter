@@ -49,7 +49,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
-
+  String _type = "偶数";
   void _incrementCounter() {
     setState(() {
       // This call to setState tells the Flutter framework that something has
@@ -58,6 +58,11 @@ class _MyHomePageState extends State<MyHomePage> {
       // _counter without calling setState(), then the build method would not be
       // called again, and so nothing would appear to happen.
       _counter++;
+      if (_counter % 2 == 0) {
+        _type = "偶数";
+      }else{
+        _type = "奇数";
+      }
     });
   }
 
@@ -73,11 +78,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
-        title: Row(children: [
-          Icon(Icons.create),
-          Text("初めてのタイトル"),
-        ]
-        )
+        title: Text(widget.title),
       ),
       drawer: Drawer(child: Center(child: Text("Drawer"))),
       // body: Center(
@@ -110,16 +111,29 @@ class _MyHomePageState extends State<MyHomePage> {
       //     ],
       //   ),
       // ),
-      body: Text("初めてのテキスト"),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => {print("押したね?")},
-        child: Icon(Icons.timer),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              'You have pushed the button the my times:',
+            ),
+            Text(
+              '$_counter',
+              style: Theme.of(context).textTheme.headline4,
+            ),
+              if (_counter % 2 == 0)
+                Text('偶数です', style: TextStyle(fontSize: 20, color: Colors.red)),
+              if (_counter % 2 == 1)
+                Text('奇数です', style: TextStyle(fontSize: 20, color: Colors.red)),
+          ],
+        ),
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: _incrementCounter,
-      //   tooltip: 'Increment',
-      //   child: const Icon(Icons.add),
-      // ), // This trailing comma makes auto-formatting nicer for build methods.
+      floatingActionButton: FloatingActionButton(
+        onPressed: _incrementCounter,
+        tooltip: 'Increment',
+        child: const Icon(Icons.add),
+      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
