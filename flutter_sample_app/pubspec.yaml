@@ -29,6 +29,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  shared_preferences: ^2.0.8 # 2021/11/11時点
+  url_launcher: ^6.0.12 # 2021/11/11時点
 
 
   # The following adds the Cupertino Icons font to your application.
