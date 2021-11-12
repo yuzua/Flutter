@@ -121,6 +121,8 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Text(
               '$_counter',
+              // Integrationテストのキー
+              key: Key('counter'),
               style: Theme.of(context).textTheme.headline4,
             ),
             if (_counter % 2 == 0)
@@ -132,6 +134,8 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
+        // Integrationテストのキー
+        key: Key('increment'),
         onPressed: _incrementCounter,
         tooltip: 'Increment',
         child: const Icon(Icons.add),
