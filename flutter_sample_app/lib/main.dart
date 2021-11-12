@@ -113,23 +113,15 @@ class _MyHomePageState extends State<MyHomePage> {
       //   ),
       // ),
       body: Center(
-        child: Column(
-          // mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button the my times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-            if (_counter % 2 == 0)
-              Text('偶数です', style: TextStyle(fontSize: 20, color: Colors.red)),
-            if (_counter % 2 == 1)
-              Text('奇数です', style: TextStyle(fontSize: 20, color: Colors.red)),
-            Icon(Icons.open_in_browser,), // このIconにonPressedをつけたい
-          ],
-        ),
+        child: IconButton(
+          icon: Icon(Icons.open_in_browser),
+          onPressed: () async {
+            String url = Uri.encodeFull("https://github.com/yuzua/Flutter");
+            if (await canLaunch(url)) {
+              await launch(url);
+            }
+          },
+        )
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
