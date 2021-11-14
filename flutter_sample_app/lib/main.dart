@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_sample_app/TestPage1.dart';
+import 'package:flutter_sample_app/TestPage2.dart';
+import 'package:flutter_sample_app/TestPage3.dart';
 
 void main() {
   runApp(const MyApp());
@@ -51,7 +52,14 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
+  bool flag = false;
+
+  _click() async {
+    setState(() {
+      flag = !flag;
+    });
+  }
       // This call to setState tells the Flutter framework that something has
       // changed in this State, which causes it to rerun the build method below
       // so that the display can reflect the updated values. If we changed
@@ -67,7 +75,35 @@ class _MyHomePageState extends State<MyHomePage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
-      body: TestPage1(),
+      appBar: AppBar(
+        title: Text(widget.title),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            AnimatedContainer(
+              duration: Duration(seconds: 3),
+              width: flag ? 100 : 50,
+              height: flag ? 50 : 100,
+              padding: flag ? EdgeInsets.all(0) : EdgeInsets.all(30),
+              margin: flag ? EdgeInsets.all(0) : EdgeInsets.all(30),
+              transform: flag ? Matrix4.skewX(0.0) : Matrix4.skewX(0.3),
+              color: flag ? Colors.blue : Colors.grey,
+            ),
+            AnimatedSwitcher(
+              duration: Duration(seconds: 3),
+              child: flag
+              ? Text("何もない")
+              : Icon(Icons.favorite, color: Colors.pink)
+              ),
+          ],
+        ),
+      ),
+      floatingActionButton: 
+        Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+          FloatingActionButton(onPressed: _click, child:  Icon(Icons.add),)
+        ]),
       );
   }
 }
