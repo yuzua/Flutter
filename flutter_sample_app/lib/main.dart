@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
@@ -53,11 +55,24 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
-  bool flag = false;
+  late AnimationController _animationController;
+  late Animation _animation;
 
-  _click() async {
+  _play() async {
     setState(() {
-      flag = !flag;
+      _animationController.forward();
+    });
+  }
+
+  _stop() async {
+    setState(() {
+      _animationController.stop();
+    });
+  }
+
+  _reverse() async {
+    setState(() {
+      _animationController.reverse();
     });
   }
       // This call to setState tells the Flutter framework that something has
@@ -65,6 +80,19 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
       // so that the display can reflect the updated values. If we changed
       // _counter without calling setState(), then the build method would not be
       // called again, and so nothing would appear to happen.
+
+  @override
+  void initState() {
+    super.initState();
+    _animationController = AnimationController(vsync: this, duration: Duration(seconds: 1));
+    _animation = _animationController.drive(Tween(begin: 0.0, end: 2.0*pi));
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -79,30 +107,21 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
         title: Text(widget.title),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            AnimatedContainer(
-              duration: Duration(seconds: 3),
-              width: flag ? 100 : 50,
-              height: flag ? 50 : 100,
-              padding: flag ? EdgeInsets.all(0) : EdgeInsets.all(30),
-              margin: flag ? EdgeInsets.all(0) : EdgeInsets.all(30),
-              transform: flag ? Matrix4.skewX(0.0) : Matrix4.skewX(0.3),
-              color: flag ? Colors.blue : Colors.grey,
-            ),
-            AnimatedSwitcher(
-              duration: Duration(seconds: 3),
-              child: flag
-              ? Text("何もない")
-              : Icon(Icons.favorite, color: Colors.pink)
-              ),
-          ],
+        child: AnimatedBuilder(
+          animation: _animation,
+          builder: (context, _) {
+            return Transform.rotate(
+              angle: _animation.value,
+              child: Icon(Icons.cached, size: 100),
+            );
+          },
         ),
       ),
       floatingActionButton: 
-        Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-          FloatingActionButton(onPressed: _click, child:  Icon(Icons.add),)
+        Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+          FloatingActionButton(onPressed: _play, child:  Icon(Icons.arrow_forward),),
+          FloatingActionButton(onPressed: _stop, child: Icon(Icons.pause),),
+          FloatingActionButton(onPressed: _reverse, child: Icon(Icons.arrow_back),),
         ]),
       );
   }
