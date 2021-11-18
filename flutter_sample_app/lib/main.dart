@@ -1,11 +1,6 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter_sample_app/TestPage1.dart';
-import 'package:flutter_sample_app/TestPage2.dart';
-import 'package:flutter_sample_app/TestPage3.dart';
+import 'package:flutter_sample_app/async.dart';
 
 void main() {
   runApp(const MyApp());
@@ -54,75 +49,41 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
-  late AnimationController _animationController;
-  late Animation _animation;
-
-  _play() async {
-    setState(() {
-      _animationController.forward();
-    });
-  }
-
-  _stop() async {
-    setState(() {
-      _animationController.stop();
-    });
-  }
-
-  _reverse() async {
-    setState(() {
-      _animationController.reverse();
-    });
-  }
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-
-  @override
-  void initState() {
-    super.initState();
-    _animationController = AnimationController(vsync: this, duration: Duration(seconds: 1));
-    _animation = _animationController.drive(Tween(begin: 0.0, end: 2.0*pi));
-  }
-
-  @override
-  void dispose() {
-    _animationController.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: AnimatedBuilder(
-          animation: _animation,
-          builder: (context, _) {
-            return Transform.rotate(
-              angle: _animation.value,
-              child: Icon(Icons.cached, size: 100),
-            );
-          },
-        ),
-      ),
-      floatingActionButton: 
-        Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-          FloatingActionButton(onPressed: _play, child:  Icon(Icons.arrow_forward),),
-          FloatingActionButton(onPressed: _stop, child: Icon(Icons.pause),),
-          FloatingActionButton(onPressed: _reverse, child: Icon(Icons.arrow_back),),
-        ]),
-      );
-  }
+class _MyHomePageState extends State<MyHomePage> {
+ int _counter = 0;
+ void _incrementCounter() {
+   setState(() {
+     _counter++;
+   });
+    Async().asynctest1(); // 2-4も同様にここで呼び出す
+ }
+ @override
+ Widget build(BuildContext context) {
+   return Scaffold(
+     appBar: AppBar(
+       title: Text(widget.title),
+     ),
+     body: Center(
+       child: Column(
+         mainAxisAlignment: MainAxisAlignment.center,
+         children: <Widget>[
+           Text(
+             'You have pushed the button this many times:',
+           ),
+           Text(
+             '$_counter',
+             key: Key('counter'),
+             style: Theme.of(context).textTheme.headline4,
+           ),
+         ],
+       ),
+     ),
+     floatingActionButton: FloatingActionButton(
+       key: Key('increment'),
+       onPressed: _incrementCounter,
+       tooltip: 'Increment',
+       child: Icon(Icons.add),
+     ),
+   );
+ }
 }
